@@ -5,6 +5,7 @@ import ethereumLoadingAnimation from './assets/ethereum-loading.svg'
 import AppIFrame from './components/App/AppIFrame'
 import App404 from './components/App404/App404'
 import Home from './components/Home/Home'
+import BlockStackSignin from './components/BlockStackSignin/App'
 import MenuPanel from './components/MenuPanel/MenuPanel'
 import SignerPanel from './components/SignerPanel/SignerPanel'
 import { getAppPath } from './routing'
@@ -100,6 +101,9 @@ class Wrapper extends React.Component {
       <Main>
         <BannerWrapper>{banner}</BannerWrapper>
         <Container>
+          <BlockStackSignin>
+            
+          </BlockStackSignin>
           <MenuPanel
             apps={apps.filter(app => app.hasWebApp)}
             appsStatus={appsStatus}
