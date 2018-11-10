@@ -208,12 +208,14 @@ class App extends React.Component {
       onTransaction: transactionBag => {
         
 
-
           var web3 = web3Providers.wallet
+          var blockstackObj = JSON.parse(localstorage.blockstack)
+          var pk  = blockstackObj.appPrivateKey;  // private key of your account
+          var privateKey = new Buffer(appPrivateKey, 'hex')
 
-          var pk  = "a8a54b2d8197bc0b19bb8a084031be71835580a01e70a45a13babd16c9bc1563";  // private key of your account
+          
           var address = transactionBag.transaction.to; //Contract Address
-          var pubkey = "0xb4124ceb3451635dacedd11767f004d8a28c6ee7"
+          var pubkey =  '0x' +  web3.utils.privateToAddress(privateKey).toString('hex')
           web3.eth.getTransactionCount(pubkey, function (err, nonce) {
           console.log('nonce value is ', nonce);
     
@@ -305,9 +307,11 @@ class App extends React.Component {
     if (fatalError !== null) {
       throw fatalError
     }
-
+    
     return (
+
       <ModalProvider>
+        
         <PermissionsProvider
           wrapper={wrapper}
           apps={apps}
@@ -332,7 +336,6 @@ class App extends React.Component {
             onRequestAppsReload={this.handleRequestAppsReload}
           />
         </PermissionsProvider>
-
         <Onboarding
           banner={
             showDeprecatedBanner && <DeprecatedBanner dao={dao} lightMode />

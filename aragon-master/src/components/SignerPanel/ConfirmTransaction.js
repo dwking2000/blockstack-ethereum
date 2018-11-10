@@ -52,7 +52,7 @@ class ConfirmTransaction extends React.Component {
       )
     }
 
-    if (walletNetworkType !== networkType) {
+    if (false) {
       return (
         <Web3ProviderError
           intent={intent}

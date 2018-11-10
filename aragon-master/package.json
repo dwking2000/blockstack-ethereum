@@ -28,6 +28,7 @@
     "@aragon/ui": "^0.27.0",
     "@aragon/wrapper": "^3.0.0-beta.3",
     "@babel/polyfill": "^7.0.0",
+    "blockstack": "^18.1.0",
     "bn.js": "4.11.6",
     "date-fns": "2.0.0-alpha.22",
     "history": "^4.7.2",
