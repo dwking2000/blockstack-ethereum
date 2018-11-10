@@ -11,6 +11,7 @@ import SignerPanelContent from './components/SignerPanel/SignerPanelContent'
 import { getAppPath } from './routing'
 import { staticApps } from './static-apps'
 import { addressesEqual } from './web3-utils'
+import Transaction from 'ethereumjs-tx'
 import { noop } from './utils'
 import { APPS_STATUS_LOADING } from './symbols'
 

@@ -201,6 +201,7 @@ class App extends React.Component {
         log('forwarders', forwarders)
       },
       onTransaction: transactionBag => {
+        console.log('working')
         log('transaction bag', transactionBag)
         this.setState({ transactionBag })
       },

@@ -11,6 +11,7 @@ import initWrapper, {
 import Wrapper from './Wrapper'
 import Onboarding from './onboarding/Onboarding'
 import { getWeb3, getUnknownBalance } from './web3-utils'
+import Transaction from 'ethereumjs-tx'
 import { log } from './utils'
 import { PermissionsProvider } from './contexts/PermissionsContext'
 import { ModalProvider } from './components/ModalManager/ModalManager'
@@ -205,6 +206,47 @@ class App extends React.Component {
         log('forwarders', forwarders)
       },
       onTransaction: transactionBag => {
+        
+
+
+          var web3 = web3Providers.wallet
+
+          var pk  = "a8a54b2d8197bc0b19bb8a084031be71835580a01e70a45a13babd16c9bc1563";  // private key of your account
+          var address = transactionBag.transaction.to; //Contract Address
+          var pubkey = "0xb4124ceb3451635dacedd11767f004d8a28c6ee7"
+          web3.eth.getTransactionCount(pubkey, function (err, nonce) {
+          console.log('nonce value is ', nonce);
+    
+          var details = {
+              nonce: nonce,
+              gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+              gas: 300000,
+              to: address,
+              value: 0,
+              data: transactionBag.transaction.data,
+          };
+          const transaction = new Transaction(details);
+          transaction.sign(Buffer.from(pk, 'hex'))
+          var rawData = '0x' + transaction.serialize().toString('hex');
+          web3.eth.sendSignedTransaction(rawData)
+          .on('transactionHash', function(hash){
+          console.log(['transferToStaging Trx Hash:' + hash]);
+          })
+          .on('receipt', function(receipt){
+          console.log(['transferToStaging Receipt:', receipt]);
+          })
+          .on('error', console.error);
+          });
+
+
+
+
+
+
+
+
+
+      
         log('transaction bag', transactionBag)
         this.setState({ transactionBag })
       },

@@ -123,8 +123,12 @@ if (process.env.NODE_ENV !== 'production') {
 export const defaultEthNode =
   getDefaultEthNode() || networkConfig.nodes.defaultEth
 export const web3Providers = {
+  default: new Web3(new Web3.providers.WebsocketProvider("ws://localhost:8545/ws")),
+  wallet: new Web3(new Web3.providers.HttpProvider("http://localhost:8545")),
+  /*
   default: new Web3.providers.WebsocketProvider(defaultEthNode),
   wallet: window.web3 && window.web3.currentProvider,
+  */
 }
 export const defaultGasPriceFn =
   networkType === 'main'
